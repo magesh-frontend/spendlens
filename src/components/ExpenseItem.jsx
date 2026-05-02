@@ -1,51 +1,35 @@
-import React from 'react';
-import './ExpenseItem.css';
-import { catMap } from '../App';
+import { catMap } from "../App";
+import "./ExpenseItem.css";
 
-export default function ExpenseItem({ expense, onEdit, onDelete }) {
-  const cat = catMap[expense.category] || catMap['other'];
-
+function ExpenseItem({
+  expense,
+  deleteExpense,
+}) {
   return (
     <div className="expense-item">
-      <div className="cat-icon" style={{ background: cat.color }}>
-        <span>{cat.icon}</span>
-      </div>
-
       <div className="expense-info">
-        <div className="expense-desc">{expense.desc}</div>
-        <div className="expense-meta">
-          {new Date(expense.date).toLocaleDateString('en-IN', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-          })}
-          <span
-            className="cat-tag"
-            style={{ background: cat.color, color: cat.tc }}
-          >
-            {cat.label}
-          </span>
-        </div>
+        <h4>
+          {catMap[expense.category]}{" "}
+          {expense.desc}
+        </h4>
+
+        <p>{expense.category}</p>
       </div>
 
-      <div className="expense-amount">
-        ₹{parseFloat(expense.amount).toLocaleString('en-IN', {
-          maximumFractionDigits: 2,
-        })}
+      <div className="expense-price">
+        ₹{expense.amount}
       </div>
 
-      <div className="item-actions">
-        <button className="icon-btn" title="Edit" onClick={() => onEdit(expense)}>
-          ✎
-        </button>
-        <button
-          className="icon-btn del-btn"
-          title="Delete"
-          onClick={() => onDelete(expense.id)}
-        >
-          ✕
-        </button>
-      </div>
+      <button
+        className="btn-cancel"
+        onClick={() =>
+          deleteExpense(expense.id)
+        }
+      >
+        Delete
+      </button>
     </div>
   );
 }
+
+export default ExpenseItem;

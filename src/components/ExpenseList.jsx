@@ -1,36 +1,29 @@
-import React from 'react';
-import './ExpenseList.css';
-import ExpenseItem from './ExpenseItem';
+import ExpenseItem from "./ExpenseItem";
+import "./ExpenseList.css";
 
-export default function ExpenseList({ expenses, total, onEdit, onDelete }) {
+function ExpenseList({
+  expenses,
+  deleteExpense,
+}) {
+  if (expenses.length === 0) {
+    return (
+      <p className="empty-text">
+        No expenses found
+      </p>
+    );
+  }
+
   return (
-    <div>
-      <div className="section-header">
-        <div className="section-title">Transactions</div>
-        <span className="count-badge">{expenses.length} items</span>
-      </div>
-
-      {expenses.length === 0 ? (
-        <div className="empty">
-          <div className="empty-icon">🔍</div>
-          <p>
-            {total === 0
-              ? 'No expenses yet. Add your first one!'
-              : 'No results found.'}
-          </p>
-        </div>
-      ) : (
-        <div className="expense-list">
-          {expenses.map(e => (
-            <ExpenseItem
-              key={e.id}
-              expense={e}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          ))}
-        </div>
-      )}
+    <div className="expense-list">
+      {expenses.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          expense={expense}
+          deleteExpense={deleteExpense}
+        />
+      ))}
     </div>
   );
 }
+
+export default ExpenseList;

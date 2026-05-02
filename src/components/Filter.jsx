@@ -1,28 +1,35 @@
-import React from 'react';
-import './Filter.css';
-import { CATS } from '../App';
+import { CATS } from "../App";
+import "./Filter.css";
 
-export default function Filter({ filter, setFilter, search, setSearch }) {
+function Filter({ filter, setFilter }) {
   return (
-    <div className="controls">
-      <div className="search-wrap">
-        <input
-          placeholder="Search expenses..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="filter-pills">
-        {CATS.map(c => (
-          <button
-            key={c.id}
-            className={`pill${filter === c.id ? ' active' : ''}`}
-            onClick={() => setFilter(c.id)}
-          >
-            {c.icon} {c.label}
-          </button>
-        ))}
-      </div>
+    <div className="filter">
+      <button
+        className={
+          filter === "All"
+            ? "active-filter"
+            : ""
+        }
+        onClick={() => setFilter("All")}
+      >
+        All
+      </button>
+
+      {CATS.map((cat) => (
+        <button
+          key={cat}
+          className={
+            filter === cat
+              ? "active-filter"
+              : ""
+          }
+          onClick={() => setFilter(cat)}
+        >
+          {cat}
+        </button>
+      ))}
     </div>
   );
 }
+
+export default Filter;
