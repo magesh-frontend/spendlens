@@ -83,7 +83,7 @@ http://localhost:3000
 
 ## 🌐 Live Demo
 
-Coming Soon...
+https://spendlens-eight.vercel.app
 
 ---
 
