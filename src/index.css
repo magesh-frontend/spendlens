@@ -1,0 +1,68 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --surface2: #f0ede8;
+  --border: #e2ddd6;
+  --text: #1a1814;
+  --text2: #6b6660;
+  --text3: #a09a94;
+  --accent: #c84b2f;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --radius: 10px;
+
+  --tag-food: #fff0e8;     --tag-food-t: #b84a00;
+  --tag-travel: #e8f0ff;   --tag-travel-t: #1a4fa0;
+  --tag-bills: #f8e8ff;    --tag-bills-t: #7a2fa0;
+  --tag-health: #e8fff0;   --tag-health-t: #1a7a40;
+  --tag-other: #f5f5f5;    --tag-other-t: #555555;
+}
+
+[data-theme='dark'] {
+  --bg: #121110;
+  --surface: #1e1c1a;
+  --surface2: #272421;
+  --border: #3a3530;
+  --text: #f0ede8;
+  --text2: #a09a94;
+  --text3: #6b6660;
+  --accent: #e8603f;
+
+  --tag-food: #2a1800;     --tag-food-t: #ffaa60;
+  --tag-travel: #001a3a;   --tag-travel-t: #60aaff;
+  --tag-bills: #1a0028;    --tag-bills-t: #cc80ff;
+  --tag-health: #001a10;   --tag-health-t: #60cc90;
+  --tag-other: #222222;    --tag-other-t: #aaaaaa;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  transition: background 0.3s, color 0.3s;
+}
+
+h1, h2, h3 {
+  font-family: 'Syne', sans-serif;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+}
+
+input, select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
