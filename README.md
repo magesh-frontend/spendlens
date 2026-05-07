@@ -1,34 +1,65 @@
-# SpendLens 💰
+# 💰 SpendLens App
 
-SpendLens is a modern personal expense tracker web application built with React.  
-It helps users manage daily expenses, track spending habits, and organize financial records with a clean and responsive interface.
+A personal expense tracking application built using React.js.
+
+Users can add expenses, track spending, filter categories, and manage daily expenses with a clean and responsive UI.
+
+---
+
+## 🌐 Live Demo
+
+https://spendlens-eight.vercel.app
 
 ---
 
 ## 🚀 Features
 
-- ➕ Add new expenses
-- 🗑 Delete expenses
-- 🔍 Filter and search expenses
-- 🌙 Dark mode support
-- 📱 Responsive design
-- ⚡ Fast and lightweight UI
-- 💾 Local storage data persistence
+- Add new expenses
+- Delete expenses
+- Filter expenses by category
+- Sort expenses (Latest / High / Low)
+- Total spending calculation
+- Monthly budget tracking
+- Smart spending insights
+- LocalStorage data persistence
+- Responsive design
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Built With
 
 - React.js
-- JavaScript (ES6)
+- JavaScript (ES6+)
 - CSS3
 - HTML5
+- LocalStorage API
 
 ---
 
-## 📂 Project Structure
+## 💡 What I Practiced
+
+In this project I worked on:
+
+- React Hooks (useState, useEffect, useMemo)
+- CRUD operations (Create / Delete expenses)
+- Filtering and sorting logic
+- Conditional rendering
+- Component-based architecture
+- State management
+- LocalStorage handling
+- UI logic for finance tracking
+
+---
+
+## ⚙️ Run Locally
 
 ```bash
+git clone https://github.com/magesh-frontend/spendlens.git
+cd spendlens
+npm install
+npm start
+
+Project Structure
 spendlens/
 │
 ├── public/
@@ -40,89 +71,11 @@ spendlens/
 │   └── index.css
 │
 ├── package.json
-├── package-lock.json
-├── .gitignore
 └── README.md
-```
 
----
+👨‍💻 Developer
 
-## ⚙️ Installation & Setup
+Magesh B
+Frontend Developer (React)
 
-Clone the repository:
-
-```bash
-git clone https://github.com/YOUR_USERNAME/spendlens.git
-```
-
-Navigate to the project folder:
-
-```bash
-cd spendlens
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm start
-```
-
-Open in browser:
-
-```bash
-http://localhost:3000
-```
-
----
-
-## 🌐 Live Demo
-
-https://spendlens-eight.vercel.app
-
----
-
-## 📸 Screenshots
-
-Add your project screenshots here.
-
-Example:
-
-```md
-![Home Page](./screenshots/home.png)
-```
-
----
-
-## 🔮 Future Improvements
-
-- Expense analytics charts
-- Firebase authentication
-- Cloud database integration
-- Monthly budget planner
-- Export reports (PDF/Excel)
-- AI-based spending insights
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome.  
-Feel free to fork this repository and submit pull requests.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
-
-Developed by Magesh
+GitHub: https://github.com/magesh-frontend

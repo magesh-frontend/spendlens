@@ -42,36 +42,31 @@ function App() {
     );
   }, [expenses]);
 
+  // ➕ Add Expense
   const addExpense = (expense) => {
     const updated = [
-      {
-        ...expense,
-        id: Date.now(),
-      },
+      { ...expense, id: Date.now() },
       ...expenses,
     ];
 
     setExpenses(updated);
+    setToast("✅ Expense added");
 
-    setToast("Expense added");
-
-    setTimeout(() => {
-      setToast("");
-    }, 2000);
+    setTimeout(() => setToast(""), 2000);
   };
 
+  // ❌ Delete Expense
   const deleteExpense = (id) => {
     setExpenses(
       expenses.filter((item) => item.id !== id)
     );
 
-    setToast("Expense removed");
+    setToast("❌ Expense removed");
 
-    setTimeout(() => {
-      setToast("");
-    }, 2000);
+    setTimeout(() => setToast(""), 2000);
   };
 
+  // 🔍 Filter
   const filteredExpenses =
     filter === "All"
       ? expenses
@@ -79,20 +74,16 @@ function App() {
           (item) => item.category === filter
         );
 
+  // 📊 Sort
   const sortedExpenses = [...filteredExpenses].sort(
     (a, b) => {
-      if (sortBy === "high") {
-        return b.amount - a.amount;
-      }
-
-      if (sortBy === "low") {
-        return a.amount - b.amount;
-      }
-
+      if (sortBy === "high") return b.amount - a.amount;
+      if (sortBy === "low") return a.amount - b.amount;
       return b.id - a.id;
     }
   );
 
+  // 💰 Total spent
   const totalSpent = useMemo(() => {
     return expenses.reduce(
       (acc, item) => acc + Number(item.amount),
@@ -100,48 +91,48 @@ function App() {
     );
   }, [expenses]);
 
+  // ⚡ Budget percentage
+  const budgetPercent = Math.min(
+    (totalSpent / monthlyBudget) * 100,
+    100
+  );
+
+  // 📢 Insight
   const monthlyInsight = useMemo(() => {
-    if (totalSpent > monthlyBudget) {
-      return "Budget exceeded";
-    }
-
-    if (totalSpent > monthlyBudget * 0.7) {
-      return "High spending";
-    }
-
-    return "Budget under control";
+    if (totalSpent > monthlyBudget)
+      return "⚠️ Budget Exceeded";
+    if (totalSpent > monthlyBudget * 0.7)
+      return "⚡ High Spending";
+    return "✅ Budget Under Control";
   }, [totalSpent]);
 
+  // 🔥 Top category
   const topCategory = useMemo(() => {
-    const categoryMap = {};
+    const map = {};
 
     expenses.forEach((item) => {
-      categoryMap[item.category] =
-        (categoryMap[item.category] || 0) +
+      map[item.category] =
+        (map[item.category] || 0) +
         Number(item.amount);
     });
 
-    let highest = "";
-
-    Object.keys(categoryMap).forEach((cat) => {
-      if (
-        !highest ||
-        categoryMap[cat] >
-          categoryMap[highest]
-      ) {
-        highest = cat;
+    let top = "";
+    Object.keys(map).forEach((cat) => {
+      if (!top || map[cat] > map[top]) {
+        top = cat;
       }
     });
 
-    return highest || "No data";
+    return top || "No data";
   }, [expenses]);
 
   return (
     <div className="app">
-      {toast && (
-        <div className="toast">{toast}</div>
-      )}
 
+      {/* TOAST */}
+      {toast && <div className="toast">{toast}</div>}
+
+      {/* HEADER */}
       <header className="header">
         <div className="header-title">
           <div className="logo">SL</div>
@@ -149,46 +140,51 @@ function App() {
         </div>
       </header>
 
+      {/* STATS */}
       <section className="stats">
-        <div className="stat-card">
-          <p className="stat-label">
-            Total Spending
-          </p>
 
-          <h2 className="stat-value accent">
-            ₹{totalSpent}
-          </h2>
+        <div className="stat-card">
+          <p>Total Spending</p>
+          <h2>₹{totalSpent}</h2>
         </div>
 
         <div className="stat-card">
-          <p className="stat-label">
-            Monthly Insight
-          </p>
-
-          <h2 className="stat-value">
-            {monthlyInsight}
-          </h2>
+          <p>Monthly Insight</p>
+          <h2>{monthlyInsight}</h2>
         </div>
 
         <div className="stat-card">
-          <p className="stat-label">
-            Top Category
-          </p>
-
-          <h2 className="stat-value">
-            {topCategory}
-          </h2>
+          <p>Top Category</p>
+          <h2>{topCategory}</h2>
         </div>
+
       </section>
 
+      {/* 📊 BUDGET PROGRESS BAR */}
+      <div className="budget-box">
+        <p>
+          Budget: ₹{totalSpent} / ₹{monthlyBudget}
+        </p>
+
+        <div className="progress-bar">
+          <div
+            className="progress"
+            style={{ width: `${budgetPercent}%` }}
+          ></div>
+        </div>
+      </div>
+
+      {/* WARNING */}
       {totalSpent > monthlyBudget && (
         <div className="budget-warning">
-          Monthly budget exceeded
+          ⚠️ Monthly Budget Exceeded
         </div>
       )}
 
+      {/* FORM */}
       <ExpenseForm addExpense={addExpense} />
 
+      {/* TOOLBAR */}
       <div className="toolbar">
         <Filter
           filter={filter}
@@ -202,19 +198,17 @@ function App() {
           }
         >
           <option value="latest">Latest</option>
-          <option value="high">
-            Highest Amount
-          </option>
-          <option value="low">
-            Lowest Amount
-          </option>
+          <option value="high">Highest</option>
+          <option value="low">Lowest</option>
         </select>
       </div>
 
+      {/* LIST */}
       <ExpenseList
         expenses={sortedExpenses}
         deleteExpense={deleteExpense}
       />
+
     </div>
   );
 }
